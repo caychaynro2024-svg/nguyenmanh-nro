@@ -47,7 +47,7 @@ header h1 {
     gap: 40px;
     background: #1f1f1f;
     padding: 14px 10px;
-    font-size: 15px;
+    font-size: 20px;
     color: #ddd;
     border-bottom: 1px solid #3a3a3a;
     margin-bottom: 10px;
@@ -141,7 +141,7 @@ header h1 {
 table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 20px;
+    font-size: 17px;
 }
 
 thead {
@@ -247,4 +247,74 @@ th, td {
     header h1 { font-size: 28px; }
     .contact-bar { flex-direction: column; gap: 10px; }
     #search-input { width: 100%; }
+}
+
+/* Thanh danh mục cuộn nhanh */
+.category-bar {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 0 20px;
+}
+
+.category-item {
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--blue-header1);
+    font-weight: 500;
+    padding: 5px 12px;
+    background: white;
+    border: 1px solid var(--blue-border);
+    border-radius: 15px;
+    transition: 0.3s;
+}
+
+.category-item:hover {
+    background: var(--blue-main);
+    color: white;
+}
+
+/* Mở rộng Panel Modal */
+.modal-content {
+    max-width: 500px; /* Tăng từ 400px lên 500px */
+    padding: 40px;    /* Tăng khoảng cách bên trong */
+}
+
+.modal-content a {
+    color: var(--blue-main);
+    text-decoration: none;
+    font-weight: 600;
+}
+/* Style riêng cho link Facebook */
+.fb-link {
+    color: #ddd; /* Màu trắng xám cho hợp với thanh đen */
+    text-decoration: none; /* Bỏ gạch chân mặc định */
+    font-weight: 500;
+    transition: all 0.3s ease; /* Hiệu ứng chuyển động mượt */
+    position: relative;
+}
+
+/* Hiệu ứng khi Đại Ca di chuột vào */
+.fb-link:hover {
+    color: #3498db; /* Đổi sang màu xanh main của web */
+    text-shadow: 0 0 10px rgba(52, 152, 219, 0.5); /* Thêm chút ánh sáng xanh */
+}
+
+/* Tạo đường gạch chân hiệu ứng chạy từ giữa ra */
+.fb-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 50%;
+    background-color: #3498db;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.fb-link:hover::after {
+    width: 100%;
 }

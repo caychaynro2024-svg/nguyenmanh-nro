@@ -114,7 +114,9 @@ const pricesData = [
       ["80ty - 90ty", "100.000", ""],
       ["Combo 40ty - 70ty", "150.000", ""],
     ],
-    note: ["Chuẩn bị đồ trước khi treo"],
+    note: ["Chuẩn bị đồ trước khi treo",
+      "Đậu mình lo"
+    ],
   },
   {
     title: "Dịch Vụ Khác",
@@ -141,6 +143,43 @@ const pricesData = [
     note : ["Up full tất cả ib mình tư vấn cho dễ"]
   },
   {
+    title: "Treo Mảnh Vỡ Bông Tai",
+    columns: ["OPTION", "CHI TIẾT",""],
+    rows: [
+      [
+        "Bông Tai Cấp 2 [50.000 đ]",
+        "- Sức Mạnh >40ty, Có Bông Tai<br>- SĐ tối thiểu >90k<br>- Bùa Dẻo Dai, Mạnh Mẽ, . . .<br>- Chậm nhất: 67 ngày",""
+      ],
+      [
+        "Bông Tai Cấp 3 [100.000]",
+        "- Sức Mạnh >40ty, Có Bông Tai Cấp 2<br>- SĐ tối thiểu >90k<br>- Bùa Dẻo Dai, Mạnh Mẽ, . . .<br>- Chậm nhất: 200 ngày",""
+      ],
+    ],
+    note: [
+      "Miễn Phí Up MHBT (YC Có CT Kháng Lạnh & TĐLT)",
+      "Miễn Phí Up Thời Gian Giáp Luyện Tập",
+    ],
+  },
+  {
+    title: "Treo 3.000 Killis",
+    columns: ["OPTION", "CHI TIẾT",""],
+    rows: [
+      [
+        "Bình Thường [100.000 đ]",
+        "- SĐ Tối Thiểu 120k<br>- Ngọc Mua TĐLT~65n/day<br>- Bùa Dẻo Dai, Mạnh Mẽ, . . .<br>- Có Thể YC Mua Bùa Killis",""
+      ],
+      [
+        "Max Speed [Inbox]",
+        "- Sức Mạnh Sư/Đệ >40Ty<br>- 2 Set SĐ 5sao Sư/Đệ<br>- Phần Còn Lại Mình Lo All",""
+      ],
+    ],
+    note: [
+      "Có Thể Up Song Song MVBT/MHBT",
+      "Max Speed Mình Lo Ngọc, Giá Sẽ Không Rẻ!",
+      "Thời Gian Hoàn Thành Tùy Theo Acc Có SĐ Cao Hay Thấp",
+    ],
+  },
+  {
     title: " Proxy",
     columns: ["Dịch vụ", "Giá", ""],
     rows: [
@@ -157,6 +196,17 @@ const pricesData = [
       ["Cloudvpsviet.com", "Xem web", ""],
     ],
     note : ["VPS bao uy tín"]
+  },
+  {
+    title: "Dịch vụ rút ví trả sau, thẻ tín dụng ",
+    columns: ["Loại", "Phí", ""],
+    rows: [
+      ["Momo", "8% (1m còn 920k)", ""],
+      ["Zalo", "8% (1m còn 920k)", ""],
+      ["Tnex", "5% (1m còn 950k)", ""],
+      ["Thẻ tín dụng các loại", "5% (1m còn 950k)", ""],
+    ],
+    note : ["Các loại khác ib zalo mình để tư vấn"]
   },
 ];
 
@@ -180,16 +230,30 @@ window.onclick = function(event) {
     }
 }
 
-/* RENDER */
+/* RENDER & CATEGORY LOGIC */
 const pricesGrid = document.getElementById("prices-grid");
+const categoryBar = document.getElementById("category-bar");
+
 if (pricesGrid) {
-    pricesData.forEach((item) => {
-      pricesGrid.appendChild(
-        createCard(item.title, item.columns, item.rows, item.note),
-      );
+    pricesData.forEach((item, index) => {
+        // Tạo Card
+        const card = createCard(item.title, item.columns, item.rows, item.note);
+        card.id = "card-index-" + index; // Gán ID để cuộn tới
+        pricesGrid.appendChild(card);
+
+        // Tạo nút trên thanh danh mục
+        const catBtn = document.createElement("span");
+        catBtn.className = "category-item";
+        catBtn.textContent = item.title;
+        catBtn.onclick = function() {
+            document.getElementById("card-index-" + index).scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+        };
+        categoryBar.appendChild(catBtn);
     });
 }
-
 function searchService() {
     const input = document.getElementById('search-input').value.toLowerCase();
     const cards = document.querySelectorAll('.card');
